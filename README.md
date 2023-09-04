@@ -1,6 +1,8 @@
 # CodeVenture
 
-![Testo alternativo](logo.png)
+<div style="text-align:center;">
+  <img src="logo.png" alt="Testo alternativo" width="500">
+</div>
 
 ## Members
 - ### [Marco Pirò](https://github.com/marcopiro91)
