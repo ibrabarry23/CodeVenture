@@ -1,7 +1,7 @@
 # CodeVenture
 
 <div style="text-align:center;">
-  <img src="logo.png" alt="Testo alternativo" width="500">
+  <img src="logo.png" alt="Testo alternativo" width="600">
 </div>
 
 ## Members
