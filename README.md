@@ -12,4 +12,3 @@
 - ### [Luciano  Rea](https://github.com/Camrotez)
 - ### [Dina Timcu](https://github.com/dinasaura)
 - ### [Ibrahima Tely Barry](https://github.com/ibrabarry23)
-  
