@@ -53,32 +53,31 @@ export default function Game() {
       // NPc 
       const npcTexture = PIXI.Texture.from('personaggio.png'); 
 
-      // Crea una nuova istanza del personaggio NPC
       const npc = new PIXI.Sprite(npcTexture);
       npc.width = 300;
       npc.height = 300;
       npc.anchor.set(0.5, 0.21);
 
-      npc.x = character.x + 350; // Puoi regolare questa posizione in base alle tue esigenze
-      npc.y = character.y; // Stessa altezza del personaggio principale
+      npc.x = character.x + 350; 
+      npc.y = character.y; 
 
       app.stage.addChild(npc);
-      npcRef.current = npc; // Assegna il riferimento all'NPC
+      npcRef.current = npc; 
     
     };
 
     addNPC();
-
+      //  movimento del personaggio
     const handleKeyDown = (event) => {
       const character = characterRef.current;
 
       if (event.key === 'ArrowLeft') {
         character.x -= isRunning ? characterSpeed * 2 : characterSpeed;
-        scrollDirection = -1; // Sposta a sinistra
+        scrollDirection = -1;
       }
       if (event.key === 'ArrowRight') {
         character.x += isRunning ? characterSpeed * 2 : characterSpeed;
-        scrollDirection = 1; // Sposta a destra
+        scrollDirection = 1;
       }
       if (event.key === 'ArrowUp' && !isJumping) {
         isJumping = true;
@@ -97,7 +96,7 @@ export default function Game() {
         scrollDirection = 0;
       }
     };
-
+      //  eventi jump
     const updateCharacterPosition = () => {
       const character = characterRef.current;
 
