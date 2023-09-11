@@ -1,4 +1,5 @@
 import React from 'react';
+import './pixel-font.css';
 
 const footerStyle = {
   backgroundColor: '#019CD8',
@@ -18,14 +19,16 @@ const groupStyle = {
   display: 'flex',
   flexDirection: 'column', 
   alignItems: 'center', 
-  gap: '5px', 
+  gap: '5px',
+  fontSize: '24px', 
+  fontFamily: 'pixel-font',
 };
 
 const linkStyle = {
   color: 'white',
   textDecoration: 'none',
   fontSize: '20px', 
-  fontFamily: 'pixel-font'
+  fontFamily: 'pixel-font',
 };
 
 const largerLogoStyle = {
@@ -33,14 +36,9 @@ const largerLogoStyle = {
   height: '30px',
 };
 
-const largerPixilStyle = {
-  width: '30px',
-  height: '30px',
-};
-
 const logoStyle = {
-  width: '100px',
-  height: '100px',
+  width: '115px',
+  height: '115px',
 };
 
 const whiteBackground = {
@@ -55,6 +53,14 @@ const copyrightStyle = {
   bottom: '18px', 
   right: '30px', 
   fontSize: '12px', 
+  fontFamily: 'pixel-font'
+};
+
+const greenTextStyle = {
+  color: '#CFFF4B',
+  fontSize: '24px',
+  marginBottom: '20px',
+  marginTop: '10px', 
 };
 
 const backgroundOverlayStyle = {
@@ -128,20 +134,22 @@ const backgroundOverlayStyle5 = {
 };
 
 function Footer() {
+
+  
   return (
     <footer style={footerStyle}>
       <div style={groupsContainerStyle}>
         {/* Gruppo 1 */}
-        <div style={{ ...groupStyle, fontSize: '24px' }}>
-          <p style={{ color: '#CFFF4B' }}>Generale</p>
+        <div style={groupStyle}>
+          <p style={greenTextStyle}>Generale</p>
           <a style={linkStyle} href="#">Chi siamo</a>
           <a style={linkStyle} href="#">Centro Assistenza</a>
           <a style={linkStyle} href="#">Contatti</a>
         </div>
 
         {/* Gruppo 2 */}
-        <div style={{ ...groupStyle, fontSize: '24px' }}>
-          <p style={{ color: '#CFFF4B' }}>Framework</p>
+        <div style={groupStyle}>
+          <p style={greenTextStyle}>Framework</p>
           <p style={{ color: 'white', fontSize: '19px' }}>Esempio</p>
           <p style={{ color: 'white', fontSize: '19px' }}>Esempio</p>
           <div>
@@ -150,8 +158,8 @@ function Footer() {
         </div>
 
         {/* Gruppo 3 */}
-        <div style={{ ...groupStyle, fontSize: '24px' }}>
-          <p style={{ color: '#CFFF4B' }}>Seguiteci</p>
+        <div style={groupStyle}>
+          <p style={greenTextStyle}>Seguiteci</p>
           <div style={{ display: 'flex', gap: '4px' }}>
             <a style={{ ...linkStyle, ...whiteBackground }} href="#"><img src="image/github-logo.png" alt="GitHub Logo" style={largerLogoStyle} /></a>
             <a style={{ ...linkStyle, ...whiteBackground }} href="#"><img src="image/discord.png" alt="Discord Logo" style={largerLogoStyle} /></a>
@@ -159,7 +167,7 @@ function Footer() {
           </div>
           <div style={{ display: 'flex', gap: '4px' }}>
             <a style={{ ...linkStyle, ...whiteBackground }} href="#"><img src="image/linkedin.png" alt="LinkedIn Logo" style={largerLogoStyle} /></a>
-            <a style={{ ...linkStyle, ...whiteBackground }} href="#"><img src="image/pixil.png" alt="Pixil Logo" style={largerPixilStyle} /></a>
+            <a style={{ ...linkStyle, ...whiteBackground }} href="#"><img src="image/pixil.png" alt="Pixil Logo" style={largerLogoStyle} /></a>
           </div>
         </div>
       </div>
