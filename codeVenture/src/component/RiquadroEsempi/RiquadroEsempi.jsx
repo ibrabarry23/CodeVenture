@@ -17,7 +17,7 @@ function RiquadroEsempio(){
     };
 
     return(
-        <div className="flex flex-col gap-4 p-5 rounded-xl w-9/12	 ">
+        <div className="flex flex-col gap-4 p-5 rounded-xl w-2/4	 ">
             <div className=" flex justify-around">
                 <button
                     className={getButtonClassName("ESEMPIO 1")}
