@@ -1,10 +1,14 @@
+import NavBar from './Components/NavBar/NavBar'
 import './App.css'
-import FrameSetting from './component/FrameSetting/FrameSetting'
+import Footer from './Components/Footer'
+import RiquadroEsempi from './RiquadroEsempi/RiquadroEsempi'
 
 function App() {
   return (
     <>
-        <FrameSetting/>
+        <NavBar/>
+        <RiquadroEsempi/>
+        <Footer/>
     </>
   )
 }
