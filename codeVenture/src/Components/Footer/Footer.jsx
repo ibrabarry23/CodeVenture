@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './pixel-font.css';
+import ContactModal from '../Contatti/ContactModal';
 
 const footerStyle = {
   backgroundColor: '#019CD8',
@@ -134,21 +135,38 @@ const backgroundOverlayStyle5 = {
 };
 
 function Footer() {
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
+  const openContactModal = () => {
+    setIsContactModalOpen(true);
+  };
+
+  const closeContactModal = () => {
+    setIsContactModalOpen(false);
+  };
   
   return (
     <footer style={footerStyle}>
       <div style={groupsContainerStyle}>
         {/* Gruppo 1 */}
-        <div style={groupStyle}>
+        <div style={{ ...groupStyle, flex: 1, margin: '0 45px 0 0'}}>
           <p style={greenTextStyle}>Generale</p>
           <a style={linkStyle} href="#">Chi siamo</a>
           <a style={linkStyle} href="#">Centro Assistenza</a>
-          <a style={linkStyle} href="#">Contatti</a>
-        </div>
+          <a
+          style={linkStyle}
+          href="#"
+          onClick={openContactModal} 
+        >
+          Contatti
+        </a>
+      </div>
+
+      <ContactModal isOpen={isContactModalOpen} toggleModal={closeContactModal} />
+      
 
         {/* Gruppo 2 */}
-        <div style={groupStyle}>
+        <div style={{ ...groupStyle, flex: 1, margin: '0 45px 0 0' }}>
           <p style={greenTextStyle}>Framework</p>
           <p style={{ color: 'white', fontSize: '19px' }}>Esempio</p>
           <p style={{ color: 'white', fontSize: '19px' }}>Esempio</p>
@@ -158,7 +176,7 @@ function Footer() {
         </div>
 
         {/* Gruppo 3 */}
-        <div style={groupStyle}>
+        <div style={{ ...groupStyle, flex: 1, margin: '0 45px 0 0' }}>
           <p style={greenTextStyle}>Seguiteci</p>
           <div style={{ display: 'flex', gap: '4px' }}>
             <a style={{ ...linkStyle, ...whiteBackground }} href="#"><img src="image/github-logo.png" alt="GitHub Logo" style={largerLogoStyle} /></a>
