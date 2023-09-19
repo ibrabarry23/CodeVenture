@@ -1,28 +1,38 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import * as PIXI from 'pixi.js';
 import { Howl } from 'howler';
 
 export default function Game() {
-  const fieldContainer = useRef(null); // Riferimento del campo
-  const characterRef = useRef(null); // Riferimento del personaggio
-  const npcRef = useRef(null); // Riferimento dell''NPC
+  const fieldContainer = useRef(null);
+  const characterRef = useRef(null);
+  const npcRef = useRef(null);
   const characterSpeed = 5;
   const jumpVelocity = -10;
-  const gravity = 0.5;
-  const scrollSpeed = 0.5; // velocità dello scroll
+  const gravity = 0.6;
+  let isRunning = false;
+  let isJumping = false;
+  let characterJumpVelocity = 0;
+  let collisionOccurred = false;
+  let conversationActive = false;
+
+  const [scrollDirection, setScrollDirection] = useState(0);
+
   useEffect(() => {
     const app = new PIXI.Application({
-      width: 900,
-      height: 600,
+      width: window.innerWidth,
+      height: window.innerHeight,
       transparent: true,
     });
 
-    fieldContainer.current.appendChild(app.view);
-    // dimesnisoni campo 
-    const fieldWidth = 1200; 
-    const fieldHeight = 600;
+    const handleResize = () => {
+      app.renderer.resize(window.innerWidth, window.innerHeight);
+    };
 
-    // immagine campo da gioco  
+    fieldContainer.current.appendChild(app.view);
+
+    const fieldWidth = window.innerWidth;
+    const fieldHeight = window.innerHeight;
+
     const fieldTexture = PIXI.Texture.from('sfondo.jpg');
     const field = new PIXI.Sprite(fieldTexture);
     field.width = fieldWidth;
@@ -30,59 +40,56 @@ export default function Game() {
 
     app.stage.addChild(field);
 
-    // personaggio principale
     const characterTexture = PIXI.Texture.from('personaggio.png');
     const character = new PIXI.Sprite(characterTexture);
-    // dimensioni del personaggio
     character.width = 300;
     character.height = 300;
-    //posizione del personaggio 
     character.anchor.set(0.5, 0.21);
-    character.x = app.screen.width / 2;
-    character.y = app.screen.height / 2;
-
-    let isRunning = false;
-    let isJumping = false;
-    let jumpVelocity = 0;
-    let scrollDirection = 0; // dirrezione scrolling
+    character.x = app.screen.width / 4;
+    character.y = app.screen.height / 1.7;
 
     app.stage.addChild(character);
     characterRef.current = character;
 
     const addNPC = () => {
-      // NPc 
-      const npcTexture = PIXI.Texture.from('personaggio.png'); 
-
+      const npcTexture = PIXI.Texture.from('personaggio.png');
       const npc = new PIXI.Sprite(npcTexture);
       npc.width = 300;
       npc.height = 300;
       npc.anchor.set(0.5, 0.21);
-
-      npc.x = character.x + 350; 
-      npc.y = character.y; 
-
+      npc.x = character.x + 1150;
+      npc.y = character.y;
       app.stage.addChild(npc);
-      npcRef.current = npc; 
-    
+      npcRef.current = npc;
     };
 
     addNPC();
-      //  movimento del personaggio
+
+    window.addEventListener('resize', handleResize);
+
     const handleKeyDown = (event) => {
       const character = characterRef.current;
 
       if (event.key === 'ArrowLeft') {
         character.x -= isRunning ? characterSpeed * 2 : characterSpeed;
-        scrollDirection = -1;
+        setScrollDirection(-1);
       }
+
       if (event.key === 'ArrowRight') {
-        character.x += isRunning ? characterSpeed * 2 : characterSpeed;
-        scrollDirection = 1;
+        const maxX = character.x + 550;
+        const newCharacterX = character.x + (isRunning ? characterSpeed * 2 : characterSpeed);
+
+        if (newCharacterX <= maxX) {
+          character.x = newCharacterX;
+          setScrollDirection(1);
+        }
       }
+
       if (event.key === 'ArrowUp' && !isJumping) {
         isJumping = true;
-        jumpVelocity = -10;
+        characterJumpVelocity = jumpVelocity;
       }
+
       if (event.key === 'Shift') {
         isRunning = true;
       }
@@ -93,49 +100,101 @@ export default function Game() {
         isRunning = false;
       }
       if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-        scrollDirection = 0;
+        setScrollDirection(0);
       }
     };
-      //  eventi jump
+
     const updateCharacterPosition = () => {
       const character = characterRef.current;
+      const npc = npcRef.current;
 
       if (isJumping) {
-        jumpVelocity += gravity;
-        character.y += jumpVelocity;
+        characterJumpVelocity += gravity;
+        character.y += characterJumpVelocity;
 
-        if (character.y >= app.screen.height / 2) {
-          character.y = app.screen.height / 2;
+        if (character.y >= app.screen.height / 1.7) {
+          character.y = app.screen.height / 1.7;
           isJumping = false;
-          jumpVelocity = 0;
+          characterJumpVelocity = 0;
         }
       }
 
-      // scrolling 
-      if (scrollDirection === 1) {
-        field.x -= characterSpeed * scrollSpeed; 
-        if (field.x < -fieldWidth + app.screen.width) {
-          field.x = -fieldWidth + app.screen.width;
+      const characterBounds = character.getBounds();
+      const npcBounds = npc.getBounds();
+
+      if (
+        characterBounds.x + characterBounds.width > npcBounds.x &&
+        characterBounds.x < npcBounds.x + npcBounds.width &&
+        characterBounds.y + characterBounds.height > npcBounds.y &&
+        characterBounds.y < npcBounds.y + npcBounds.height
+      ) {
+        isRunning = false;
+        if (!collisionOccurred) {
+          collisionOccurred = true;
+          startConversation(app);
         }
-      } else if (scrollDirection === -1) {
-        field.x += characterSpeed * scrollSpeed; 
-        if (field.x > 0) {
-          field.x = 0;
-        }
+      } else {
+        collisionOccurred = false;
+      }
+
+      if (isRunning && !collisionOccurred) {
+        character.x += characterSpeed;
       }
     };
-    // musica Howler
+
+    const startConversation = (app) => {
+      if (!conversationActive) {
+        conversationActive = true;
+
+        const graphics = new PIXI.Graphics();
+        graphics.beginFill(0xffffff);
+        graphics.drawRect(600, 700, 900, 150);
+        graphics.endFill();
+        app.stage.addChild(graphics);
+
+        let conversationText = new PIXI.Text('Ciao, sono code è da oggi inzierà la tua avventura nella programmazione', {
+          fontFamily: 'Arial',
+          fontSize: 24,
+          fill: 0x000000,
+        });
+        conversationText.x = 650;
+        conversationText.y = 750;
+        app.stage.addChild(conversationText);
+
+        graphics.interactive = true;
+        graphics.buttonMode = true;
+        graphics.on('pointerdown', () => {
+          app.stage.removeChild(graphics);
+          app.stage.removeChild(conversationText);
+
+          if (conversationText.text === 'Ciao, sono code è da oggi inzierà la tua avventura nella programmazione') {
+            conversationText.text = 'La tua avventura incomincia dalle variabili';
+          } else if (conversationText.text === 'La tua avventura incomincia dalle variabili') {
+            conversationText.text = `Una variabile è un oggetto che rappresenta una posizione di memoria in cui è possibile memorizzare e recuperare un valore.`;
+          } else if (conversationText.text === `Una variabile è un oggetto che rappresenta una posizione di memoria in cui è possibile memorizzare e recuperare un valore.`) {
+            conversationText.text = `Una variabile ha un nome univoco che viene utilizzato per identificarla nel programma`;
+          } else if (conversationText.text === 'Sto bene, grazie!') {
+            conversationText.text = 'Come posso aiutarti?';
+          } else {
+            conversationActive = false;
+          }
+
+          app.stage.addChild(graphics);
+          app.stage.addChild(conversationText);
+        });
+      }
+    };
+
     const music = new Howl({
-      src: ['01music.mp3'], 
+      src: ['01music.mp3'],
       volume: 0.5,
     });
 
     music.play();
 
-    // intervallo che riproduce la canzone da a 1 secondo dopo 17 secondi
     setInterval(() => {
-      music.seek(0); 
-    }, 17000); 
+      music.seek(0);
+    }, 17000);
 
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('keyup', handleKeyUp);
@@ -145,9 +204,8 @@ export default function Game() {
     });
 
     return () => {
-      // la musica  viene fermata quando il componente viene smontato 
       music.stop();
-
+      window.removeEventListener('resize', handleResize);
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp);
     };
