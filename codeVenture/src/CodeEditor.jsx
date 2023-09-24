@@ -11,13 +11,10 @@ function CodeEditor() {
 
   const runCode = () => {
     try {
-      // Esegui il codice fornito dall'utente
       eval(code);
 
-      // Visualizza il messaggio "Hello, World!" tramite console.log
       console.log("Hello, World!");
 
-      // Imposta un messaggio di output
       setOutput('Esecuzione completata. Controlla la console per "Hello, World!"');
     } catch (error) {
       setOutput('Errore di esecuzione: ' + error.message);
