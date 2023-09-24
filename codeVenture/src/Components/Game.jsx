@@ -187,6 +187,8 @@ export default function Game() {
             conversationText.text = `Let viene utilizzata per dichiarare una variabile con uno scope di blocco.`;
           }else if(conversationText.text === `Let viene utilizzata per dichiarare una variabile con uno scope di blocco.`) {
             conversationText.text = `Sintassi di let: let variabelName="sono una variabile";`
+          } else if (  conversationText.text === `Sintassi di let: let variabelName="sono una variabile"`) {
+            conversationText.text =`Costanti,`
           }
           else{
             conversationActive = false;
