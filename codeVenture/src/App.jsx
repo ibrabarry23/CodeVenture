@@ -12,7 +12,7 @@ function App() {
     <div className='flex flex-col items-center'>
       <Button/>
       <Routes>
-        <Route path='/Game' element={<Game/>} />
+        <Route path='/game' element={<Game/>} />
       </Routes>
         <NavBar/>
         <FramePresentazione/>
