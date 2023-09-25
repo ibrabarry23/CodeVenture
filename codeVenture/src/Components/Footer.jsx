@@ -137,7 +137,7 @@ function Footer() {
 
   
   return (
-    <footer style={footerStyle}>
+    <footer style={footerStyle} className='w-full'>
       <div style={groupsContainerStyle}>
         {/* Gruppo 1 */}
         <div style={groupStyle}>
