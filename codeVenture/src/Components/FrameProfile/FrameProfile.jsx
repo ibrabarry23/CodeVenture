@@ -1,4 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { BrowserRouter as Router, Link } from 'react-router-dom'
+import './FrameProfile.css'
+import { ButtonProfile } from "../Components""
 
 export default function FrameProfile() {
   const [lives, setLives] = useState(3) /* vite 3 */
