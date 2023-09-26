@@ -1,0 +1,19 @@
+.app{
+  background-image: url("/public/images/wooden-texture-background-wood-material-pattern_107791-8838 1.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.btn_csl{
+  -webkit-text-stroke: 1.5px black;
+}
+
+.btn_primary{
+  background-image: url("/public/images/pngwing 36.png");
+/* width: 600px; */
+padding: 0 29px;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height: 78px;
+  -webkit-text-stroke: 1.5px black;
+}

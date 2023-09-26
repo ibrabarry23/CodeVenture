@@ -7,10 +7,10 @@ import { FramePresentazione } from './Components/FramePresentazione/FramePresent
 function App() {
   return (
     <div className='flex flex-col items-center'>
-        <NavBar/>
-        <FramePresentazione/>
-        <RiquadroEsempi/>
-        <Footer/>
+      <NavBar />
+      <FramePresentazione />
+      <RiquadroEsempi />
+      <Footer />
     </div>
   )
 }
