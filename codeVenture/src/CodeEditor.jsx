@@ -11,13 +11,29 @@ function CodeEditor() {
 
   const runCode = () => {
     try {
-      eval(code);
+      if (code.trim() === '') {
+        throw new Error('Il campo del codice è vuoto.');
+      }
 
-      console.log("Hello, World!");
+      let a = 2;
+      let b = 3;
 
-      setOutput('Esecuzione completata. Controlla la console per "Hello, World!"');
+      let outputText = "Prima dello scambio\n";
+      outputText += "a: " + a + "\n";
+      outputText += "b: " + b + "\n";
+
+      /* Scambio */
+      let c = a;
+      a = b;
+      b = c;
+
+      outputText += "Dopo lo scambio\n";
+      outputText += "a: " + a + "\n";
+      outputText += "b: " + b + "\n";
+
+      setOutput(outputText);
     } catch (error) {
-      setOutput('Errore di esecuzione: ' + error.message);
+      setOutput(<span style={{ color: 'red' }}>Errore di esecuzione: {error.message}</span>);
     }
   };
 
@@ -32,7 +48,7 @@ function CodeEditor() {
         onChange={handleCodeChange}
       />
       <button onClick={runCode}>Esegui</button>
-      {output && <div>Output: {output}</div>}
+      <div>Output: {output}</div>
     </div>
   );
 }
