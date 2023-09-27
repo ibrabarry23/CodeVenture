@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import * as PIXI from 'pixi.js';
-import { Howl } from 'howler';
-
+import CodeEditor from '../CodeEditor';
 export default function Game() {
   const fieldContainer = useRef(null);
   const characterRef = useRef(null);
@@ -145,57 +144,73 @@ export default function Game() {
     const startConversation = (app) => {
       if (!conversationActive) {
         conversationActive = true;
-
+    
         const graphics = new PIXI.Graphics();
         graphics.beginFill(0xffffff);
-        graphics.drawRect(600, 700, 900, 150);
+        graphics.drawRect(600, 700, 950, 150);
         graphics.endFill();
         app.stage.addChild(graphics);
-
+    
         let conversationText = new PIXI.Text('Ciao, sono code è da oggi inzierà la tua avventura nella programmazione', {
           fontFamily: 'Arial',
           fontSize: 24,
           fill: 0x000000,
         });
-        conversationText.x = 650;
+        conversationText.x = 610;
         conversationText.y = 750;
         app.stage.addChild(conversationText);
-
+    
         graphics.interactive = true;
         graphics.buttonMode = true;
         graphics.on('pointerdown', () => {
           app.stage.removeChild(graphics);
           app.stage.removeChild(conversationText);
-
           if (conversationText.text === 'Ciao, sono code è da oggi inzierà la tua avventura nella programmazione') {
             conversationText.text = 'La tua avventura incomincia dalle variabili';
           } else if (conversationText.text === 'La tua avventura incomincia dalle variabili') {
-            conversationText.text = `Una variabile è un oggetto che rappresenta una posizione di memoria in cui è possibile memorizzare e recuperare un valore.`;
-          } else if (conversationText.text === `Una variabile è un oggetto che rappresenta una posizione di memoria in cui è possibile memorizzare e recuperare un valore.`) {
+            conversationText.text = `Una variabile è un oggetto che rappresenta una posizione di memoria.`;
+          } else if (conversationText.text === `Una variabile è un oggetto che rappresenta una posizione di memoria.`) {
+            conversationText.text = `in cui è possibile memorizzare e recuperare un valore`;
+          } else if (conversationText.text === `in cui è possibile memorizzare e recuperare un valore`) {
             conversationText.text = `Una variabile ha un nome univoco che viene utilizzato per identificarla nel programma`;
-          } else if (conversationText.text === 'Sto bene, grazie!') {
-            conversationText.text = 'Come posso aiutarti?';
-          } else {
-            conversationActive = false;
+          } else if (conversationText.text === `Una variabile ha un nome univoco che viene utilizzato per identificarla nel programma`) {
+            conversationText.text = `Il nome della variabile è ciò che permette di fare riferimento ad essa nel programma.`;
+          } else if (conversationText.text === `Il nome della variabile è ciò che permette di fare riferimento ad essa nel programma.`){
+              conversationText.text = `In javascript le variabili vengono dichiarate con le parole chiave:`;
+          } else if (conversationText.text === `In javascript le variabili vengono dichiarate con le parole chiave:`) {
+            conversationText.text = `Var: la variabile può essere dichiarata senza assegnare un valore iniziale.`;
+          } else if (conversationText.text === `Var: la variabile può essere dichiarata senza assegnare un valore iniziale.`){
+              conversationText.text=` Può essere successivamente assegnata con un valore.`;
+          } else if (conversationText.text===` Può essere successivamente assegnata con un valore.`) {
+            conversationText.text = `Tuttavia la parola chiave var è deprecata, ed è stata sostituita con let.`;
+          } else if ( conversationText.text ===`Tuttavia la parola chiave var è deprecata, ed è stata sostituita con let.`){
+            conversationText.text = `Let viene utilizzata per dichiarare una variabile con uno scope di blocco.`;
+          } else if(conversationText.text === `Let viene utilizzata per dichiarare una variabile con uno scope di blocco.`) {
+            conversationText.text = `Sintassi di let: let variabelName="sono una variabile";`
+          } else if (  conversationText.text === `Sintassi di let: let variabelName="sono una variabile";`) {
+            conversationText.text =`Costanti, in javascript le costanti vengono dichiarate con la parola chiave const`;
+          } else if( conversationText.text ===`Costanti, in javascript le costanti vengono dichiarate con la parola chiave const`){
+            conversationText.text =`nel momento in cui si assegna un valore a const, quel valore non può essere modificato.`;
+          } else if (conversationText.text ===`nel momento in cui si assegna un valore a const, quel valore non può essere modificato.`) {
+            conversationText.text = `Sintassi di const: const pi=3.14;`
+          } else if( conversationText.text === `Sintassi di const: const pi=3.14;`){
+            conversationText.text = `Adesso che abbiamo visto le prime nonzioni sulle variabili, partirà la tua prima sfida`
+          }else if (conversationText.text === `Adesso che abbiamo visto le prime nonzioni sulle variabili, partirà la tua prima sfida`){
+            conversationText.text=`Date due variabili si scambi il loro contenuto`
+          }else{
+            conversationComplete = true;
           }
-
+    
           app.stage.addChild(graphics);
           app.stage.addChild(conversationText);
+          
         });
+        
       }
+      
     };
-
-    const music = new Howl({
-      src: ['01music.mp3'],
-      volume: 0.5,
-    });
-
-    music.play();
-
-    setInterval(() => {
-      music.seek(0);
-    }, 17000);
-
+    
+   
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('keyup', handleKeyUp);
 
@@ -204,12 +219,19 @@ export default function Game() {
     });
 
     return () => {
-      music.stop();
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp);
     };
   }, []);
 
-  return <div id="field-container" ref={fieldContainer}></div>;
+  return (
+    <div className="relative">
+      <div id="field-container" ref={fieldContainer} className="relative">
+      </div>
+      <div className="absolute top-4 left-4">
+        <CodeEditor />
+      </div>
+    </div>
+  );
 }
