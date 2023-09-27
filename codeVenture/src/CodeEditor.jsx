@@ -15,6 +15,8 @@ function CodeEditor() {
         throw new Error('Il campo del codice è vuoto.');
       }
 
+      eval(code);
+
       let a = 2;
       let b = 3;
 
@@ -46,6 +48,7 @@ function CodeEditor() {
         theme="vs-dark"
         value={code}
         onChange={handleCodeChange}
+        className="rounded" // Aggiungi la classe 'rounded' per i bordi stondati
       />
       <button onClick={runCode}>Esegui</button>
       <div>Output: {output}</div>

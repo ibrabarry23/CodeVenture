@@ -6,19 +6,14 @@ import { FramePresentazione } from './Components/FramePresentazione/FramePresent
 import Button from './Components/ButtonPlay/Button'
 import { Routes,Route} from 'react-router-dom'
 import Game from './Components/Game'
-
+import Layout from './Components/Layout'
 function App() {
   return (
-    <div className='flex flex-col items-center'>
-      <Button/>
-      <Routes>
-        <Route path='/Game' element={<Game/>} />
-      </Routes>
-        <NavBar/>
-        <FramePresentazione/>
-        <RiquadroEsempi/>
-        <Footer/>
-    </div>
-  )
+    <Routes>
+      <Route path='/' element={<Layout> <FramePresentazione /> <RiquadroEsempi /> <Footer /> </Layout>} />
+      <Route path='/Game/*' element={<Game />} />
+    </Routes>
+  );
 }
-export default App
+
+export default App;
