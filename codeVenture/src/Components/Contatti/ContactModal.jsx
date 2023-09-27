@@ -93,7 +93,7 @@ function ContactModal({ isOpen, toggleModal }) {
                 <input
                   type="email"
                   id="email"
-                  className="border rounded-md p-2 w-full text-center"
+                  className="border rounded-md p-2 w-full text-left"
                   placeholder="Inserisci la tua email"
                 />
               </div>
@@ -107,7 +107,7 @@ function ContactModal({ isOpen, toggleModal }) {
                 </label>
                 <textarea
                   id="message"
-                  className="border rounded-md p-2 w-full h-20 text-center"
+                  className="border rounded-md p-2 w-full h-20 text-left"
                   placeholder="Messaggio da inviare ..."
                 />
               </div>
