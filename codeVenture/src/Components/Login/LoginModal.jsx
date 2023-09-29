@@ -1,26 +1,26 @@
-import React ,{useState} from "react";
+import React, { useState } from "react";
 
-const modalStyle = {
+const stileModale = {
   fontFamily: "pixel-font",
 };
 
-const textStyle = {
+const stileTesto = {
   fontSize: "28px",
   fontWeight: "bold",
   textShadow: "2px 8px 4px rgba(0, 0, 0, 0.2)",
 };
 
-const buttonStyle = {
+const stileBottone = {
   fontWeight: "bold",
   textShadow: "0 0 6px rgba(0, 0, 0, 0.8)",
 };
 
-const labelStyle = {
+const stileEtichetta = {
   fontSize: "14px",
   fontWeight: "bold",
 };
 
-const closeButtonStyle = {
+const stileChiusuraBottone = {
   position: "absolute",
   left: "65%",
   top: "25%",
@@ -29,25 +29,29 @@ const closeButtonStyle = {
   fontSize: "24px",
   transition: "color 0.3s, transform 0.3s, text-shadow 0.3s",
   fontWeight: "bold",
-  cursor: "pointer", 
+  cursor: "pointer",
   textShadow: "2px 2px 4px rgba(0, 0, 0, 0.9)",
 };
 
-
-
 function LoginModal({ isOpen, toggleModal }) {
   const [isHovered, setIsHovered] = useState(false);
+  const [password, setPassword] = useState('');
+  const [mostraPassword, setMostraPassword] = useState(false);
 
-  const handleMouseEnter = () => {
+  const gestisciMouseEnter = () => {
     setIsHovered(true);
   };
 
-  const handleMouseLeave = () => {
+  const gestisciMouseLeave = () => {
     setIsHovered(false);
   };
-  const handleCloseButtonClick = () => {
-      toggleModal();
-    
+
+  const gestisciChiusuraClick = () => {
+    toggleModal();
+  };
+
+  const toggleMostraPassword = () => {
+    setMostraPassword(!mostraPassword);
   };
 
   return (
@@ -68,29 +72,29 @@ function LoginModal({ isOpen, toggleModal }) {
           ></div>
 
           <div className="bg-transparent absolute inset-0 flex items-center justify-center">
-            <div style={modalStyle}>
-            <button
-            onClick={handleCloseButtonClick}
-            className="close-button"
-            style={{
-              ...closeButtonStyle,
-              color: isHovered ? "red" : "inherit",
-              transform: isHovered ? "scale(1.1)" : "scale(1)",
-            }}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
+            <div style={stileModale}>
+              <button
+                onClick={gestisciChiusuraClick}
+                className="close-button"
+                style={{
+                  ...stileChiusuraBottone,
+                  color: isHovered ? "red" : "inherit",
+                  transform: isHovered ? "scale(1.1)" : "scale(1)",
+                }}
+                onMouseEnter={gestisciMouseEnter}
+                onMouseLeave={gestisciMouseLeave}
               >
                 X
               </button>
-              <h2 className="text-cfff4b p-2" style={textStyle}>
-               CODEVENTURE
+              <h2 className="text-cfff4b p-2" style={stileTesto}>
+                CODEVENTURE
               </h2>
 
               <div className="mt-4 flex flex-col text-start">
                 <label
                   htmlFor="email"
                   className="text-white pr-4 pb-2"
-                  style={labelStyle}
+                  style={stileEtichetta}
                 >
                   E-mail :
                 </label>
@@ -101,25 +105,41 @@ function LoginModal({ isOpen, toggleModal }) {
                   placeholder="Inserisci la tua email"
                 />
               </div>
-              <div className="mt-4 flex flex-col text-start">
+
+              <div className="mt-4 flex flex-col text-start relative">
                 <label
-                  htmlFor="message"
+                  htmlFor="password"
                   className="text-white pr-4 pb-2"
-                  style={labelStyle}
+                  style={stileEtichetta}
                 >
                   Password :
                 </label>
-                <textarea
-                  id="message"
-                  className="border rounded-md p-2 w-full h-20 text-left"
-                  placeholder="Password ..."
+                <input
+                  type={mostraPassword ? "text" : "password"}
+                  id="password"
+                  className="border rounded-md p-2 w-full"
+                  placeholder="Inserisci la tua password"
+                  value={password}
+                  readOnly
                 />
+                <button
+                  onClick={toggleMostraPassword}
+                  className="absolute right-0 top-0 m-2 text-black bg-white rounded-md px-2"
+                >
+                  {mostraPassword ? "Nascondi" : "Visualizza"}
+                </button>
               </div>
 
-              <div className="mt-4 flex justify-center">
+              <div className="mt-4 flex justify-between">
                 <button
-                  className="bg-cfff4b text-white px-10 py-4 rounded-md hover:bg-opacity-80"
-                  style={buttonStyle}
+                  className="bg-blue-500 text-white px-10 py-4 rounded-md hover:bg-blue-700"
+                  style={stileBottone}
+                >
+                  Registrati
+                </button>
+
+                <button
+                  className="bg-cfff4b text-white px-10 py-4 rounded-md hover:bg-opacity-80 ml-4"
                 >
                   Accedi
                 </button>
@@ -131,6 +151,5 @@ function LoginModal({ isOpen, toggleModal }) {
     </div>
   );
 }
+
 export default LoginModal;
-
-
