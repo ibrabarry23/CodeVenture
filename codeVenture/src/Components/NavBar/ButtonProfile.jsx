@@ -2,20 +2,17 @@ import { useState } from "react"
 import LoginModal from "../Login/LoginModal";
 
 export function ButtonProfile(){
-    const [testo,setTesto]= useState("Accedi2");
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const handleClick = () => {
-        if (testo === "Accedi2") {
-          setIsModalOpen(true);
-        } else {
-          setIsModalOpen(false);
-        }
-      };
+  const [testo, setTesto] = useState("Accedi");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-      const handleLogin = () => {
-        setIsModalOpen(false); 
-        setTesto("Profilo Utente"); 
-      };
+  const handleClick = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
+  const handleLogin = () => {
+    setIsModalOpen(false);
+    setTesto("Profilo Utente");
+  };
 
     return(
         <>

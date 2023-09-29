@@ -20,10 +20,22 @@ const labelStyle = {
   fontWeight: "bold",
 };
 
+const closeButtonStyle = {
+  position: "absolute",
+  left: "65%",
+  top: "25%",
+  color: "red",
+  fontFamily: "pixel-font",
+  fontSize: "24px",
+  transition: "color 0.3s, transform 0.3s, text-shadow 0.3s",
+  fontWeight: "bold",
+  cursor: "pointer", 
+  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.9)",
+};
+
 
 
 function LoginModal({ isOpen, toggleModal }) {
-
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
@@ -32,6 +44,10 @@ function LoginModal({ isOpen, toggleModal }) {
 
   const handleMouseLeave = () => {
     setIsHovered(false);
+  };
+  const handleCloseButtonClick = () => {
+      toggleModal();
+    
   };
 
   return (
@@ -53,7 +69,19 @@ function LoginModal({ isOpen, toggleModal }) {
 
           <div className="bg-transparent absolute inset-0 flex items-center justify-center">
             <div style={modalStyle}>
-
+            <button
+            onClick={handleCloseButtonClick}
+            className="close-button"
+            style={{
+              ...closeButtonStyle,
+              color: isHovered ? "red" : "inherit",
+              transform: isHovered ? "scale(1.1)" : "scale(1)",
+            }}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+              >
+                X
+              </button>
               <h2 className="text-cfff4b p-2" style={textStyle}>
                CODEVENTURE
               </h2>
@@ -104,4 +132,5 @@ function LoginModal({ isOpen, toggleModal }) {
   );
 }
 export default LoginModal;
+
 
