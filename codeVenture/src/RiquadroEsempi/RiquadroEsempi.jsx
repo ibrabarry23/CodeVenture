@@ -2,6 +2,9 @@ import { useState } from 'react'
 import imageLine2 from '../assets/image/Screenshot_2023-09-29_alle_18.45.23__2_-removebg-preview.png'
 import imageBgOne from '../assets/image/Screenshot_2023-09-29_alle_18.54.47__2_-removebg-preview.png'
 import imageBgTwo from '../assets/image/Screenshot_2023-09-29_alle_18.56.22__2_-removebg-preview.png'
+import imageLine3 from '../assets/image/Screenshot_2023-09-29_alle_19.19.12__2_-removebg-preview.png'
+import latestImage from '../assets/image/Screenshot_2023-09-29_alle_19.39.06__2_-removebg-preview.png'
+import './RiquadroEsempi.css'
 
 function RiquadroEsempio() {
   const [src, setSrc] = useState('./src/assets/image/image1.jpg')
@@ -20,7 +23,7 @@ function RiquadroEsempio() {
   }
 
   return (
-    <div className='flex flex-col gap-4 p-5 rounded-xl  mx-auto'>
+    <div className='flex flex-col gap-4 p-5 rounded-xl mx-auto'>
       <img
         src={imageLine2}
         className='w-80 h-auto self-start mt-4'
@@ -54,6 +57,22 @@ function RiquadroEsempio() {
           alt='Current Image'
         />
         <img src={imageBgTwo} className='w-1/6 rounded-xl' alt='Image BG Two' />
+      </div>
+      <div className='w-40 h-auto mt-4 mb-0 ml-auto mr-80'>
+        <img src={imageLine3} className='w-full h-auto' alt='Image Line 3' />
+      </div>
+
+      <div className='flex items-center justify-between'>
+        <img src={latestImage} className='w-1/3 rounded-xl' />
+        <div
+          className='w-80 text-left text-red-500 mt-0 mb-5 ml-20 pr-5 pixelFont font-bold text-xl mr-80 '
+          style={{ letterSpacing: '2px', lineHeight: '1.5' }}
+        >
+          <p className='text-center'>Our innovative game-based</p>
+          <p className='text-center'>learning technology</p>
+          <p className='text-center'>has transformed the way</p>
+          <p className='text-center'>people learn to code.</p>
+        </div>
       </div>
     </div>
   )
