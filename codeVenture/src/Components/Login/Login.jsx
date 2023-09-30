@@ -1,48 +1,124 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import SignUpModal from "./SignUpModal";  // Assicurati di importare correttamente SignUpModal dal tuo percorso
 
-function Login({ onLogin }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const stileModale = {
+  fontFamily: "pixel-font",
+};
 
-  const handleLogin = async () => {
-    try {
-      // per l'autenticazione
-      onLogin(); 
-    } catch (error) {
-      
-      console.error(error);
-    }
+const stileTesto = {
+  fontSize: "28px",
+  fontWeight: "bold",
+  textShadow: "2px 8px 4px rgba(0, 0, 0, 0.2)",
+};
+
+const stileBottone = {
+  fontWeight: "bold",
+  textShadow: "0 0 6px rgba(0, 0, 0, 0.8)",
+};
+
+const stileEtichetta = {
+  fontSize: "14px",
+  fontWeight: "bold",
+};
+
+const stileChiusuraBottone = {
+  position: "absolute",
+  left: "65%",
+  top: "25%",
+  color: "red",
+  fontFamily: "pixel-font",
+  fontSize: "24px",
+  transition: "color 0.3s, transform 0.3s, text-shadow 0.3s",
+  fontWeight: "bold",
+  cursor: "pointer",
+  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.9)",
+};
+
+function LoginModal({ isOpen, toggleModal }) {
+  const [isHovered, setIsHovered] = useState(false);
+  const [mostraSignUp, setMostraSignUp] = useState(false);  // Nuovo stato per mostrare o nascondere SignUpModal
+
+  const gestisciMouseEnter = () => {
+    setIsHovered(true);
   };
 
-  const handleSignUp = async () => {
-    try {
-      // per la registrazione
-      onLogin(); 
-    } catch (error) {
-      
-      console.error(error);
-    }
+  const gestisciMouseLeave = () => {
+    setIsHovered(false);
+  };
+
+  const gestisciChiusuraClick = () => {
+    toggleModal();
+  };
+
+  const mostraSignUpModal = () => {
+    setMostraSignUp(true);
   };
 
   return (
     <div>
-      <h2>Login o Registrazione</h2>
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button >Accedi</button>
-      <button >Registrati</button>
+      {isOpen && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div
+            className="bg-white opacity-10 absolute inset-0"
+            style={{
+              backgroundColor: "rgba(255, 255, 255, 0.7)",
+              backgroundImage: "url(image/finestra1.png)",
+              backgroundSize: "60%",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              visibility: "visible",
+              opacity: 1,
+            }}
+          ></div>
+
+          <div className="bg-transparent absolute inset-0 flex items-center justify-center">
+            <div style={stileModale}>
+              <button
+                onClick={gestisciChiusuraClick}
+                className="close-button"
+                style={{
+                  ...stileChiusuraBottone,
+                  color: isHovered ? "red" : "inherit",
+                  transform: isHovered ? "scale(1.1)" : "scale(1)",
+                }}
+                onMouseEnter={gestisciMouseEnter}
+                onMouseLeave={gestisciMouseLeave}
+              >
+                X
+              </button>
+              <h2 className="text-cfff4b p-2" style={stileTesto}>
+                CODEVENTURE
+              </h2>
+
+              <div className="mt-4 flex flex-col text-start">
+                {/* ... Altri input e campi del modulo di accesso ... */}
+              </div>
+
+              <div className="mt-4 flex justify-between">
+                <button
+                  className="bg-blue-500 text-white px-10 py-4 rounded-md hover:bg-blue-700"
+                  style={stileBottone}
+                  onClick={mostraSignUpModal}  // Aggiunto gestore click
+                >
+                  Registrati
+                </button>
+
+                <button
+                  className="bg-cfff4b text-white px-10 py-4 rounded-md hover:bg-opacity-80 ml-4"
+                >
+                  Accedi
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {mostraSignUp && (  // Se mostraSignUp è true, mostra SignUpModal
+        <SignUpModal isOpen={mostraSignUp} toggleModal={() => setMostraSignUp(false)} />
+      )}
     </div>
   );
 }
 
-export default Login;
+export default LoginModal;
