@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import SignUpModal from "../SingupModal/SingupModal"; // Assicurati di importare correttamente SignUpModal dal tuo percorso
 
 const stileModale = {
   fontFamily: "pixel-font",
@@ -35,8 +36,9 @@ const stileChiusuraBottone = {
 
 function LoginModal({ isOpen, toggleModal }) {
   const [isHovered, setIsHovered] = useState(false);
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [mostraPassword, setMostraPassword] = useState(false);
+  const [mostraSignUp, setMostraSignUp] = useState(false);
 
   const gestisciMouseEnter = () => {
     setIsHovered(true);
@@ -50,8 +52,16 @@ function LoginModal({ isOpen, toggleModal }) {
     toggleModal();
   };
 
-  const toggleMostraPassword = () => {
-    setMostraPassword(!mostraPassword);
+  const mostraSignUpModal = () => {
+    setMostraSignUp(true);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Qui puoi gestire la logica di accesso con email e password
+    console.log("Email:", email);
+    console.log("Password:", password);
+    // Aggiungi la logica di accesso qui...
   };
 
   return (
@@ -90,63 +100,67 @@ function LoginModal({ isOpen, toggleModal }) {
                 CODEVENTURE
               </h2>
 
-              <div className="mt-4 flex flex-col text-start">
-                <label
-                  htmlFor="email"
-                  className="text-white pr-4 pb-2"
-                  style={stileEtichetta}
-                >
-                  E-mail :
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  className="border rounded-md p-2 w-full text-center"
-                  placeholder="Inserisci la tua email"
-                />
-              </div>
+              <form onSubmit={handleSubmit} className="flex flex-col">
+                <div className="mt-4 flex flex-col text-start">
+                  <label
+                    htmlFor="email"
+                    className="text-white pr-4 pb-2"
+                    style={stileEtichetta}
+                  >
+                    E-mail:
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    className="border rounded-md p-2 w-full text-center"
+                    placeholder="Inserisci la tua email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
 
-              <div className="mt-4 flex flex-col text-start relative">
-                <label
-                  htmlFor="password"
-                  className="text-white pr-4 pb-2"
-                  style={stileEtichetta}
-                >
-                  Password :
-                </label>
-                <input
-                  type={mostraPassword ? "text" : "password"}
-                  id="password"
-                  className="border rounded-md p-2 w-full"
-                  placeholder="Inserisci la tua password"
-                  value={password}
-                  readOnly
-                />
-                <button
-                  onClick={toggleMostraPassword}
-                  className="absolute right-0 top-0 m-2 text-black bg-white rounded-md px-2"
-                >
-                  {mostraPassword ? "Nascondi" : "Visualizza"}
-                </button>
-              </div>
+                <div className="mt-4 flex flex-col text-start relative">
+                  <label
+                    htmlFor="password"
+                    className="text-white pr-4 pb-2"
+                    style={stileEtichetta}
+                  >
+                    Password:
+                  </label>
+                  <input
+                    type="password"
+                    id="password"
+                    className="border rounded-md p-2 w-full"
+                    placeholder="Inserisci la tua password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
 
-              <div className="mt-4 flex justify-between">
-                <button
-                  className="bg-blue-500 text-white px-10 py-4 rounded-md hover:bg-blue-700"
-                  style={stileBottone}
-                >
-                  Registrati
-                </button>
+                <div className="mt-4 flex justify-between">
+                  <button
+                    type="submit"
+                    className="bg-cfff4b text-white px-10 py-4 rounded-md hover:bg-opacity-80"
+                    style={stileBottone}
+                  >
+                    Accedi
+                  </button>
 
-                <button
-                  className="bg-cfff4b text-white px-10 py-4 rounded-md hover:bg-opacity-80 ml-4"
-                >
-                  Accedi
-                </button>
-              </div>
+                  <button
+                    className="bg-blue-500 text-white px-10 py-4 rounded-md hover:bg-blue-700 ml-4"
+                    onClick={mostraSignUpModal}
+                  >
+                    Registrati
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
+      )}
+
+      {mostraSignUp && (
+        <SignUpModal isOpen={mostraSignUp} toggleModal={() => setMostraSignUp(false)} />
       )}
     </div>
   );
