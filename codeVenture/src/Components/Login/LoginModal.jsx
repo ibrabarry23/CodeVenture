@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SignUpModal from "../SingupModal/SingupModal"; // Assicurati di importare correttamente SignUpModal dal tuo percorso
+import SignUpModal from "../SingupModal/SingupModal"; 
 
 const stileModale = {
   fontFamily: "pixel-font",
@@ -20,7 +20,6 @@ const stileEtichetta = {
   fontSize: "14px",
   fontWeight: "bold",
 };
-
 const stileChiusuraBottone = {
   position: "absolute",
   left: "65%",

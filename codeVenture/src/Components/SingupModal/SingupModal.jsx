@@ -3,7 +3,6 @@ import React, { useState } from "react";
 const stileModale = {
   fontFamily: "pixel-font",
 };
-
 const stileTesto = {
   fontSize: "28px",
   fontWeight: "bold",
@@ -71,13 +70,10 @@ function SignUpModal({ isOpen, toggleModal }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Qui puoi gestire la logica di registrazione con username, email e password
     console.log("Username:", username);
     console.log("Email:", email);
     console.log("Password:", password);
-    // Aggiungi la logica di registrazione qui...
   };
-
   return (
     <div>
       {isOpen && (
