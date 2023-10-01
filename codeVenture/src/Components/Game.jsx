@@ -147,7 +147,7 @@ export default function Game() {
     
         const graphics = new PIXI.Graphics();
         graphics.beginFill(0xffffff);
-        graphics.drawRect(600, 700, 950, 150);
+        graphics.drawRect(700, 25, 650, 500);
         graphics.endFill();
         app.stage.addChild(graphics);
     
@@ -156,8 +156,8 @@ export default function Game() {
           fontSize: 24,
           fill: 0x000000,
         });
-        conversationText.x = 610;
-        conversationText.y = 750;
+        conversationText.x = 710;
+        conversationText.y = 30;
         app.stage.addChild(conversationText);
     
         graphics.interactive = true;
