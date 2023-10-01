@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import SignUpModal from "../SingupModal/SingupModal"; 
 
 const stileModale = {
   fontFamily: "pixel-font",
 };
-
 const stileTesto = {
   fontSize: "28px",
   fontWeight: "bold",
@@ -20,6 +18,7 @@ const stileEtichetta = {
   fontSize: "14px",
   fontWeight: "bold",
 };
+
 const stileChiusuraBottone = {
   position: "absolute",
   left: "65%",
@@ -33,11 +32,12 @@ const stileChiusuraBottone = {
   textShadow: "2px 2px 4px rgba(0, 0, 0, 0.9)",
 };
 
-function LoginModal({ isOpen, toggleModal }) {
+function SignUpModal({ isOpen, toggleModal }) {
   const [isHovered, setIsHovered] = useState(false);
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [mostraSignUp, setMostraSignUp] = useState(false);
+  const [mostraPassword, setMostraPassword] = useState(false);
 
   const gestisciMouseEnter = () => {
     setIsHovered(true);
@@ -51,18 +51,29 @@ function LoginModal({ isOpen, toggleModal }) {
     toggleModal();
   };
 
-  const mostraSignUpModal = () => {
-    setMostraSignUp(true);
+  const generaPassword = () => {
+    const length = 12; // Lunghezza della password
+    const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
+    const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const numericChars = '0123456789';
+    const specialChars = '!@#$%^&*()_-+=<>?';
+
+    const charSet = lowercaseChars + uppercaseChars + numericChars + specialChars;
+
+    const nuovaPassword = Array.from({ length }, () => charSet[Math.floor(Math.random() * charSet.length)]).join('');
+    setPassword(nuovaPassword);
+  };
+
+  const toggleMostraPassword = () => {
+    setMostraPassword(!mostraPassword);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Qui puoi gestire la logica di accesso con email e password
+    console.log("Username:", username);
     console.log("Email:", email);
     console.log("Password:", password);
-    // Aggiungi la logica di accesso qui...
   };
-
   return (
     <div>
       {isOpen && (
@@ -102,6 +113,24 @@ function LoginModal({ isOpen, toggleModal }) {
               <form onSubmit={handleSubmit} className="flex flex-col">
                 <div className="mt-4 flex flex-col text-start">
                   <label
+                    htmlFor="username"
+                    className="text-white pr-4 pb-2"
+                    style={stileEtichetta}
+                  >
+                    Nome utente:
+                  </label>
+                  <input
+                    type="text"
+                    id="username"
+                    className="border rounded-md p-2 w-full text-center"
+                    placeholder="Inserisci il tuo nome utente"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+                </div>
+
+                <div className="mt-4 flex flex-col text-start">
+                  <label
                     htmlFor="email"
                     className="text-white pr-4 pb-2"
                     style={stileEtichetta}
@@ -127,13 +156,19 @@ function LoginModal({ isOpen, toggleModal }) {
                     Password:
                   </label>
                   <input
-                    type="password"
+                    type={mostraPassword ? "text" : "password"}
                     id="password"
                     className="border rounded-md p-2 w-full"
                     placeholder="Inserisci la tua password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
+                  <button
+                    onClick={toggleMostraPassword}
+                    className="absolute right-0 top-0 m-2 text-black bg-white rounded-md px-2"
+                  >
+                    {mostraPassword ? "Nascondi" : "Visualizza"}
+                  </button>
                 </div>
 
                 <div className="mt-4 flex justify-between">
@@ -142,14 +177,14 @@ function LoginModal({ isOpen, toggleModal }) {
                     className="bg-cfff4b text-white px-10 py-4 rounded-md hover:bg-opacity-80"
                     style={stileBottone}
                   >
-                    Accedi
+                    Registrati
                   </button>
 
                   <button
-                    className="bg-blue-500 text-white px-10 py-4 rounded-md hover:bg-blue-700 ml-4"
-                    onClick={mostraSignUpModal}
+                    onClick={generaPassword}
+                    className="bg-cfff4b text-black px-10 py-4 rounded-md hover:bg-opacity-80"
                   >
-                    Registrati
+                    Genera Password
                   </button>
                 </div>
               </form>
@@ -157,12 +192,8 @@ function LoginModal({ isOpen, toggleModal }) {
           </div>
         </div>
       )}
-
-      {mostraSignUp && (
-        <SignUpModal isOpen={mostraSignUp} toggleModal={() => setMostraSignUp(false)} />
-      )}
     </div>
   );
 }
 
-export default LoginModal;
+export default SignUpModal;
