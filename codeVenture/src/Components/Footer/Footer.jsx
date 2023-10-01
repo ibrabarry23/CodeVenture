@@ -2,34 +2,18 @@ import React, { useState } from 'react';
 import './pixel-font.css';
 import ContactModal from '../Contatti/ContactModal';
 
-const footerStyle = {
-  backgroundColor: '#019CD8',
-  padding: '8px',
-  color: 'white',
-  position: 'relative',
-};
-
-const groupsContainerStyle = {
-  display: 'flex',
-  justifyContent: 'space-around',
-  alignItems: 'flex-start', 
-  gap: '45px', 
-};
 
 const groupStyle = {
   display: 'flex',
   flexDirection: 'column', 
   alignItems: 'center', 
   gap: '5px',
-  fontSize: '24px', 
   fontFamily: 'pixel-font',
 };
 
 const linkStyle = {
-  color: 'white',
-  textDecoration: 'none',
-  fontSize: '20px', 
-  fontFamily: 'pixel-font',
+  background: 'white',
+  zIndex: '2',
 };
 
 const largerLogoStyle = {
@@ -49,31 +33,19 @@ const whiteBackground = {
   margin: '2px',
 };
 
-const copyrightStyle = {
-  position: 'absolute', 
-  bottom: '18px', 
-  right: '30px', 
-  fontSize: '12px', 
-  fontFamily: 'pixel-font'
-};
 
-const greenTextStyle = {
-  color: '#CFFF4B',
-  fontSize: '24px',
-  marginBottom: '20px',
-  marginTop: '10px', 
-};
 
 const backgroundOverlayStyle = {
   position: 'absolute',
   top: '20px',
-  left: 0,
+  left: '0',
   width: '10%',
   height: '10%',
   background: 'url("image/Group.png")', 
   backgroundSize: 'cover',
   backgroundRepeat: 'no-repeat',
   opacity: 0.9, 
+  zIndex: '1',
 };
 
 const backgroundOverlayStyle2 = {
@@ -111,7 +83,7 @@ const backgroundOverlayStyle4 = {
   opacity: 0.7, 
 };
 
-const backgroundOverlayStyle6 = {
+const backgroundOverlayStyle5 = {
   position: 'absolute',
   top: '17%',
   left: '57%',
@@ -120,9 +92,10 @@ const backgroundOverlayStyle6 = {
   background: 'url("image/Group.png")', 
   backgroundSize: 'cover',
   backgroundRepeat: 'no-repeat',
+  opacity: 0.7,
 };
 
-const backgroundOverlayStyle5 = {
+const backgroundOverlayStyle6 = {
   position: 'absolute',
   top: '70%',
   left: '8%',
@@ -133,6 +106,7 @@ const backgroundOverlayStyle5 = {
   backgroundRepeat: 'no-repeat',
   opacity: 0.7, 
 };
+
 
 function Footer() {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
@@ -146,15 +120,15 @@ function Footer() {
   };
   
   return (
-    <footer style={footerStyle} className='w-full'>
-      <div style={groupsContainerStyle}>
+   <footer className='w-full footer'>
+      <div className='groupsContainerStyle'>
         {/* Gruppo 1 */}
-        <div style={{ ...groupStyle, flex: 1, margin: '0 45px 0 0'}}>
-          <p style={greenTextStyle}>Generale</p>
-          <a style={linkStyle} href="#">Chi siamo</a>
-          <a style={linkStyle} href="#">Centro Assistenza</a>
+        <div style={{ ...groupStyle, }}>
+          <p className='greenTextStyle'>Generale</p>
+          <a className='link-style' href="#">Chi siamo</a>
+          <a className='link-style' href="#">Centro Assistenza</a>
           <a
-          style={linkStyle}
+          className='link-style'
           href="#"
           onClick={openContactModal} 
         >
@@ -166,19 +140,20 @@ function Footer() {
       
 
         {/* Gruppo 2 */}
-        <div style={{ ...groupStyle, flex: 1, margin: '0 45px 0 0' }}>
-          <p style={greenTextStyle}>Framework</p>
-          <p style={{ color: 'white', fontSize: '19px' }}>Esempio</p>
-          <p style={{ color: 'white', fontSize: '19px' }}>Esempio</p>
+        <div style={{ ...groupStyle, flex: 1 }}>
+          <p className='greenTextStyle'>Framework</p>
+          <p className='link-style'>Esempio</p>
+          <p className='link-style'>Esempio</p>
           <div>
             <img src="image/logo.png" alt="Logo" style={logoStyle} />
           </div>
         </div>
 
         {/* Gruppo 3 */}
-        <div style={{ ...groupStyle, flex: 1, margin: '0 45px 0 0' }}>
-          <p style={greenTextStyle}>Seguiteci</p>
-          <div style={{ display: 'flex', gap: '4px' }}>
+        <div className='displayNoneSocial'>
+        <div style={{ ...groupStyle, flex: 1, paddingRight: '55px'}}>
+          <p className='greenTextStyle'>Seguiteci</p>
+          <div style={{ display: 'flex', gap: '6px', padding: '5px' }}>
             <a style={{ ...linkStyle, ...whiteBackground }} href="#"><img src="image/github-logo.png" alt="GitHub Logo" style={largerLogoStyle} /></a>
             <a style={{ ...linkStyle, ...whiteBackground }} href="#"><img src="image/discord.png" alt="Discord Logo" style={largerLogoStyle} /></a>
             <a style={{ ...linkStyle, ...whiteBackground }} href="#"><img src="image/instagram.png" alt="Instagram Logo" style={largerLogoStyle} /></a>
@@ -193,9 +168,10 @@ function Footer() {
       <div style={backgroundOverlayStyle2}></div>
       <div style={backgroundOverlayStyle3}></div>
       <div style={backgroundOverlayStyle4}></div>
-      <div style={backgroundOverlayStyle5}></div>
       <div style={backgroundOverlayStyle6}></div>
-      <span style={copyrightStyle}>© 2023 Codeventure</span>
+      <div style={backgroundOverlayStyle5}></div>
+      </div>
+      <span className='copyrightStyle'>© 2023 Codeventure</span>
     </footer>
   );
 }

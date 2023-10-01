@@ -4,8 +4,8 @@ function RiquadroEsempio(){
     const [src, setSrc] = useState("./src/assets/image/image1.jpg");
     const [activeButton, setActiveButton] = useState("ESEMPIO 1");
 
-    const buttonColorPress = "w-1/4 h-8 verdeScuro rounded-xl pixelFont font-bold";
-    const buttonColorHold = "w-1/4 h-8 verdeChiaro rounded-xl pixelFont font-bold";
+    const buttonColorPress = "w-full md:w-1/4 h-8 verdeScuro rounded-xl pixelFont font-bold";
+    const buttonColorHold = "w-full md:w-1/4 h-8 verdeChiaro rounded-xl pixelFont font-bold";
 
     const handlerClickImg = (e, imgSrc) => {
         setActiveButton(e.target.innerText);
@@ -17,7 +17,7 @@ function RiquadroEsempio(){
     };
 
     return(
-        <div className="flex flex-col gap-4 p-5 rounded-xl w-2/4	 ">
+        <div className="flex flex-col gap-4 p-10 pb-16 pt-10 rounded-xl w-full md:w-2/4 ">
             <div className=" flex justify-around">
                 <button
                     className={getButtonClassName("ESEMPIO 1")}
