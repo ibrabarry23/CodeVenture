@@ -18,11 +18,7 @@ function NavBar() {
         {isMenuOpen ? <MenuIconOpen /> : <MenuIcon />}
       </button>
       </div>
-      
-      
-
-      {/* mostrata solo su desktop e quando il menu è aperto su mobile */}
-      <nav className={`lg:flex  ${isMenuOpen ? "flex mt-30 mt-2 p-8 flex-row justify-items-center z-10 left-6 bg-blue-100 gap-5" : "hidden"}`}>
+      <nav className={`lg:flex  ${isMenuOpen ? "flex mt-30 mt-2 p-8 flex-row justify-items-center z-10 left-6 bg-blue-900 opacity-90 gap-5 rounded-md" : "hidden"}`}>
         <div className="lg:flex">
         <ButtonNavBar name="HOME" />
         <ButtonNavBar name="GIOCA" />
@@ -30,7 +26,7 @@ function NavBar() {
         <ButtonNavBar name="CONTATTACI" />
         </div>
         <div className="lg:flex flex items-center">
-          <ButtonProfile />
+          <ButtonProfile  />
         </div>
       </nav>
       </div>

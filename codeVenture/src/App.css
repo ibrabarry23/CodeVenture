@@ -7,6 +7,12 @@ body {
   background-image: url(./assets/image/grass-pixel-art-background-texture-250nw-1910167030.jpg);
   background-repeat: repeat;
 }
+/* 
+@media only screen and (max-width: 450px) {
+  body {
+    background-repeat: no-repeat;
+  } 
+}*/
 
 .logo {
   height: 6em;
