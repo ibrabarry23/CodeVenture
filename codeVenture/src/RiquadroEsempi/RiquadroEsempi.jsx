@@ -10,8 +10,8 @@ function RiquadroEsempio() {
   const [src, setSrc] = useState('./src/assets/image/image1.jpg')
   const [activeButton, setActiveButton] = useState('ESEMPIO 1')
 
-  const buttonColorPress = 'w-1/4 h-8 verdeScuro rounded-xl pixelFont font-bold'
-  const buttonColorHold = 'w-1/4 h-8 verdeChiaro rounded-xl pixelFont font-bold'
+    const buttonColorPress = "w-full md:w-1/4 h-8 verdeScuro rounded-xl pixelFont font-bold";
+    const buttonColorHold = "w-full md:w-1/4 h-8 verdeChiaro rounded-xl pixelFont font-bold";
 
   const handlerClickImg = (e, imgSrc) => {
     setActiveButton(e.target.innerText)
@@ -26,10 +26,10 @@ function RiquadroEsempio() {
     <div className='flex flex-col gap-4 p-5 rounded-xl mx-auto'>
       <img
         src={imageLine2}
-        className='w-80 h-auto self-start mt-4'
+        className='w-80 h-auto self-start mt-4 hidden md:block'
         alt='Image Line 2'
       />
-      <div className='flex justify-around'>
+      <div className='flex justify-around flex-col md:flex-row gap-2'>
         <button
           className={getButtonClassName('ESEMPIO 1')}
           onClick={(e) => handlerClickImg(e, './src/assets/image/image2.jpg')}
@@ -50,22 +50,22 @@ function RiquadroEsempio() {
         </button>
       </div>
       <div className='relative flex items-center justify-between'>
-        <img src={imageBgOne} className='w-1/6 rounded-xl' alt='Image BG One' />
+        <img src={imageBgOne} className='w-1/6 rounded-xl hidden md:block' alt='Image BG One ' />
         <img
           src={src}
-          className='rounded-xl bg-green-600 w-2/3'
+          className='rounded-xl bg-green-600 w-full md:w-2/3'
           alt='Current Image'
         />
-        <img src={imageBgTwo} className='w-1/6 rounded-xl' alt='Image BG Two' />
+        <img src={imageBgTwo} className='w-1/6 rounded-xl hidden md:block' alt='Image BG Two' />
       </div>
-      <div className='w-40 h-auto mt-4 mb-0 ml-auto mr-80'>
+      <div className='w-40 h-auto mt-4 mb-0 ml-auto mr-80 hidden md:block'>
         <img src={imageLine3} className='w-full h-auto' alt='Image Line 3' />
       </div>
 
-      <div className='flex items-center justify-between'>
-        <img src={latestImage} className='w-1/3 rounded-xl' />
+      <div className='flex items-center justify-between '>
+        <img src={latestImage} className='w-1/3 rounded-xl ' />
         <div
-          className='w-80 text-left text-red-500 mt-0 mb-5 ml-20 pr-5 pixelFont font-bold text-xl mr-80 '
+          className='w-80 text-left text-red-500 mt-0 mb-5 ml-20 pr-5 pixelFont font-bold text-xl mr-80 hidden md:block '
           style={{ letterSpacing: '2px', lineHeight: '1.5' }}
         >
           <p className='text-center'>Our innovative game-based</p>

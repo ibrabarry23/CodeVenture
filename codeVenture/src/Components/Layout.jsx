@@ -14,7 +14,7 @@ function Layout({ children }) {
         <Button />
       </div>
       <div
-        className='w-80 text-left text-red-500 mt-20 mb-5 ml-20 pr-5 pixelFont font-bold text-xl '
+        className='w-80 text-left text-red-500 mt-20 mb-5 ml-20 pr-5 pixelFont font-bold text-xl hidden md:block '
         style={{ letterSpacing: '2px', lineHeight: '1.5' }}
       >
         <p className='text-center'>Unlock the Magic of</p>
@@ -22,7 +22,7 @@ function Layout({ children }) {
         <p className='text-center'>Through the Joy of</p>
         <p className='text-center'>Adventure</p>
       </div>
-      <div className='ml-80 w-80 h-auto'>
+      <div className='ml-80 w-80 h-auto hidden md:block'>
         <img src={imageLine} />
       </div>
       <div className='w-full flex flex-col items-center'>{children}</div>

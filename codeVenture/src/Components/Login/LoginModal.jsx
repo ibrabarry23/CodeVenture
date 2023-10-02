@@ -68,7 +68,7 @@ function LoginModal({ isOpen, toggleModal }) {
       {isOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div
-            className="bg-white opacity-10 absolute inset-0"
+            className="bg-white opacity-10 absolute inset-0 "
             style={{
               backgroundColor: "rgba(255, 255, 255, 0.7)",
               backgroundImage: "url(image/finestra1.png)",
