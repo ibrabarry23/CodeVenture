@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
 
 function Login({ onLogin }) {
@@ -8,6 +9,20 @@ function Login({ onLogin }) {
     try {
       // per l'autenticazione
       onLogin(); 
+=======
+import { useState } from 'react';
+import { onLogin } from './onLogin.mjs';
+import {onSignUp} from './onSignUp.mjs'
+function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+ 
+  const handleLogin = async () => {
+    try {
+      // per l'autenticazione
+      await onLogin(email,password);
+      
+>>>>>>> game
     } catch (error) {
       
       console.error(error);
@@ -17,7 +32,11 @@ function Login({ onLogin }) {
   const handleSignUp = async () => {
     try {
       // per la registrazione
+<<<<<<< HEAD
       onLogin(); 
+=======
+      onSignUp(email,password) 
+>>>>>>> game
     } catch (error) {
       
       console.error(error);
@@ -39,7 +58,11 @@ function Login({ onLogin }) {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
+<<<<<<< HEAD
       <button >Accedi</button>
+=======
+      <button onClick={handleLogin}>Accedi</button>
+>>>>>>> game
       <button >Registrati</button>
     </div>
   );

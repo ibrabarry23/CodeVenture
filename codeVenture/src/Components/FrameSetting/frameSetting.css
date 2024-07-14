@@ -15,6 +15,11 @@
     
   }
   .borderImage{
+<<<<<<< HEAD
+=======
+    top:2rem;
+    
+>>>>>>> game
     display: flex;
     justify-content: center;
     border-image-source: url('../../assets/image/border-pieno.png');
@@ -29,4 +34,8 @@
     accent-color:#a19148;
     cursor: ew-resize;
   
+<<<<<<< HEAD
   }
+=======
+  }
+>>>>>>> game

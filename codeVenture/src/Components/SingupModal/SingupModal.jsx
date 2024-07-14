@@ -1,9 +1,16 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
+=======
+import { useState } from "react";
+>>>>>>> game
 
 const stileModale = {
   fontFamily: "pixel-font",
 };
+<<<<<<< HEAD
 
+=======
+>>>>>>> game
 const stileTesto = {
   fontSize: "28px",
   fontWeight: "bold",
@@ -71,6 +78,7 @@ function SignUpModal({ isOpen, toggleModal }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+<<<<<<< HEAD
     // Qui puoi gestire la logica di registrazione con username, email e password
     console.log("Username:", username);
     console.log("Email:", email);
@@ -78,6 +86,33 @@ function SignUpModal({ isOpen, toggleModal }) {
     // Aggiungi la logica di registrazione qui...
   };
 
+=======
+    const user={
+      email:email,
+      password:password,
+      name:username
+    }
+    try{
+    fetch("http://localhost:3000/newuser",{
+    method:"POST",
+    headers: {
+      'Content-Type': 'application/json',
+      },
+    body:JSON.stringify(user)
+    })
+    .then(res=>res.json())
+    .then(()=>alert("Ti sei registrato,ora effettua il login"))
+    .then(res=>console.log(res))
+    .then(()=>setIsHovered(false))
+    // per l'autenticazione
+         
+    
+  } catch (error) {
+    
+    console.error(error);
+  }
+  };
+>>>>>>> game
   return (
     <div>
       {isOpen && (
