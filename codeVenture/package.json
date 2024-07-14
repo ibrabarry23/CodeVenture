@@ -13,6 +13,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "express": "^4.19.2",
     "firebase": "^10.4.0",
+    "morgan": "^1.10.0",
     "pixi.js": "^7.2.4",
     "react": "^18.2.0",
     "react-bash": "^1.6.0",
