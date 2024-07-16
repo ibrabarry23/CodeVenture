@@ -12,10 +12,7 @@ export function ButtonProfile(){
   const handleLogin = () => {
     setIsModalOpen(false);
     setTesto("Profilo Utente");
-<<<<<<< HEAD
-=======
     
->>>>>>> game
   };
 
     return(

@@ -3,6 +3,8 @@ import * as PIXI from 'pixi.js';
 import CodeEditor from '../CodeEditor';
 import FrameSetting from './FrameSetting/FrameSetting';
 import { Link } from 'react-router-dom';
+import { BlockMath } from 'react-katex';
+
 export default function Game() {
   const [showSetting,setShowSetting]=useState(false)
   const fieldContainer = useRef(null);
@@ -172,9 +174,7 @@ procedendo in direzione del caso base. Questa parte è essenziale poiché permet
 in sottoproblemi più gestibili, avvicinandosi così alla soluzione completa.
 
 Esercizio: 
-Si scriva una funzione ricorsiva che calcoli il fattoriale di un numero. 
 
-Per calcolare il fattoriale si consideri questa formula: n! = n · (n − 1)
 `, {
           fontFamily: 'Arial',
           fontSize: 19,
@@ -187,6 +187,7 @@ Per calcolare il fattoriale si consideri questa formula: n! = n · (n − 1)
         graphics.interactive = true;
         graphics.buttonMode = true;
         graphics.on('pointerdown', () => {
+          
           app.stage.removeChild(graphics);
           app.stage.removeChild(conversationText);
           

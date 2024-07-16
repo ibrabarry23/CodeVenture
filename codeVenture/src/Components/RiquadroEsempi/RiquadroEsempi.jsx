@@ -32,21 +32,13 @@ function RiquadroEsempio() {
       <div className='flex justify-around'>
         <button
           className={getButtonClassName('ESEMPIO 1')}
-<<<<<<< HEAD
-          onClick={(e) => handlerClickImg(e, './src/assets/image/image2.jpg')}
-=======
           onClick={(e) => handlerClickImg(e, './src/assets/image/image1.jpg')}
->>>>>>> game
         >
           ESEMPIO 1
         </button>
         <button
           className={getButtonClassName('ESEMPIO 2')}
-<<<<<<< HEAD
-          onClick={(e) => handlerClickImg(e, './src/assets/image/image1.jpg')}
-=======
           onClick={(e) => handlerClickImg(e, './src/assets/image/image2.jpg')}
->>>>>>> game
         >
           ESEMPIO 2
         </button>

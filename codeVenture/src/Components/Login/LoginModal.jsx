@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-import React, { useState } from "react";
-import SignUpModal from "../SingupModal/SingupModal"; // Assicurati di importare correttamente SignUpModal dal tuo percorso
-=======
 import { useState } from "react";
 import SignUpModal from "../SingupModal/SingupModal"; 
->>>>>>> game
 
 const stileModale = {
   fontFamily: "pixel-font",
@@ -44,11 +39,8 @@ function LoginModal({ isOpen, toggleModal }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [mostraSignUp, setMostraSignUp] = useState(false);
-<<<<<<< HEAD
-=======
   const [isLogged, setIsLogged] = useState(false);
   const [mostraPassword, setMostraPassword] = useState(false);
->>>>>>> game
 
   const gestisciMouseEnter = () => {
     setIsHovered(true);
@@ -66,14 +58,6 @@ function LoginModal({ isOpen, toggleModal }) {
     setMostraSignUp(true);
   };
 
-<<<<<<< HEAD
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Qui puoi gestire la logica di accesso con email e password
-    console.log("Email:", email);
-    console.log("Password:", password);
-    // Aggiungi la logica di accesso qui...
-=======
   const toggleMostraPassword = () => {
     setMostraPassword(!mostraPassword);
   };
@@ -102,7 +86,6 @@ function LoginModal({ isOpen, toggleModal }) {
     } catch (error) {
       console.error(error);
     }
->>>>>>> game
   };
 
   return (
@@ -169,23 +152,13 @@ function LoginModal({ isOpen, toggleModal }) {
                     Password:
                   </label>
                   <input
-<<<<<<< HEAD
-                    type="password"
-=======
                     type={mostraPassword ? "text" : "password"}
->>>>>>> game
                     id="password"
                     className="border rounded-md p-2 w-full"
                     placeholder="Inserisci la tua password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
-<<<<<<< HEAD
-                </div>
-
-                <div className="mt-4 flex justify-between">
-                  <button
-=======
                   <button
                     onClick={toggleMostraPassword}
                     className="absolute right-0 top-0 m-2 text-black bg-white rounded-md px-2"
@@ -196,17 +169,11 @@ function LoginModal({ isOpen, toggleModal }) {
 
                 <div className="mt-4 flex justify-between">
                   {!isLogged && <button
->>>>>>> game
                     type="submit"
                     className="bg-cfff4b text-white px-10 py-4 rounded-md hover:bg-opacity-80"
                     style={stileBottone}
                   >
                     Accedi
-<<<<<<< HEAD
-                  </button>
-
-                  <button
-=======
                   </button>}
                   {isLogged && <button
                     type="submit"
@@ -217,16 +184,11 @@ function LoginModal({ isOpen, toggleModal }) {
                   </button>}
 
                   {!isLogged && <button
->>>>>>> game
                     className="bg-blue-500 text-white px-10 py-4 rounded-md hover:bg-blue-700 ml-4"
                     onClick={mostraSignUpModal}
                   >
                     Registrati
-<<<<<<< HEAD
-                  </button>
-=======
                   </button>}
->>>>>>> game
                 </div>
               </form>
             </div>

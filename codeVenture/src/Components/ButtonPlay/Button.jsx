@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-import { useState } from "react";
-=======
->>>>>>> game
 import "./Button.css"
 import { useNavigate } from 'react-router-dom';
 

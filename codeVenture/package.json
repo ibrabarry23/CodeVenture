@@ -10,23 +10,27 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@monaco-editor/react": "^4.6.0",
+    "@mui/material": "^5.16.1",
     "@reduxjs/toolkit": "^1.9.5",
+    "axios": "^1.7.2",
     "express": "^4.19.2",
     "firebase": "^10.4.0",
+    "katex": "^0.16.11",
     "morgan": "^1.10.0",
     "pixi.js": "^7.2.4",
     "react": "^18.2.0",
     "react-bash": "^1.6.0",
     "react-console-emulator": "^5.0.2",
     "react-dom": "^18.2.0",
+    "react-katex": "^3.0.1",
     "react-monaco-editor": "^0.54.0",
     "react-redux": "^8.1.2",
-<<<<<<< HEAD
-    "react-router-dom": "^6.16.0",
-=======
     "react-router-dom": "^6.24.1",
->>>>>>> game
-    "redux": "^4.2.1"
+    "redux": "^4.2.1",
+    "socket.io-client": "^4.7.5"
   },
   "devDependencies": {
     "@types/node": "^20.6.4",

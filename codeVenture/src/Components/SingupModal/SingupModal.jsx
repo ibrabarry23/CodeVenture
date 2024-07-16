@@ -1,16 +1,8 @@
-<<<<<<< HEAD
-import React, { useState } from "react";
-=======
 import { useState } from "react";
->>>>>>> game
 
 const stileModale = {
   fontFamily: "pixel-font",
 };
-<<<<<<< HEAD
-
-=======
->>>>>>> game
 const stileTesto = {
   fontSize: "28px",
   fontWeight: "bold",
@@ -78,15 +70,6 @@ function SignUpModal({ isOpen, toggleModal }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-<<<<<<< HEAD
-    // Qui puoi gestire la logica di registrazione con username, email e password
-    console.log("Username:", username);
-    console.log("Email:", email);
-    console.log("Password:", password);
-    // Aggiungi la logica di registrazione qui...
-  };
-
-=======
     const user={
       email:email,
       password:password,
@@ -112,7 +95,6 @@ function SignUpModal({ isOpen, toggleModal }) {
     console.error(error);
   }
   };
->>>>>>> game
   return (
     <div>
       {isOpen && (
