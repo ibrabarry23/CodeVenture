@@ -1,15 +1,15 @@
 import React, { useRef, useEffect, useState } from 'react';
 import * as PIXI from 'pixi.js';
-import CodeEditor from '../CodeEditor';
+import { Link, useNavigate } from 'react-router-dom';
 import FrameSetting from './FrameSetting/FrameSetting';
-import { Link } from 'react-router-dom';
-import { BlockMath } from 'react-katex';
 
 export default function Game() {
-  const [showSetting,setShowSetting]=useState(false)
+  const [showSetting, setShowSetting] = useState(false);
   const fieldContainer = useRef(null);
   const characterRef = useRef(null);
   const npcRef = useRef(null);
+  const navigate = useNavigate();
+
   const characterSpeed = 5;
   const jumpVelocity = -10;
   const gravity = 0.6;
@@ -61,7 +61,7 @@ export default function Game() {
       npc.width = 300;
       npc.height = 300;
       npc.anchor.set(0.5, 0.21);
-      npc.x = character.x + 1150;
+      npc.x = character.x + 610;
       npc.y = character.y;
       app.stage.addChild(npc);
       npcRef.current = npc;
@@ -146,105 +146,107 @@ export default function Game() {
       }
     };
 
+      
     const startConversation = (app) => {
       if (!conversationActive) {
         conversationActive = true;
     
         const graphics = new PIXI.Graphics();
-        graphics.beginFill(0xffffff);
-        graphics.drawRect(700, 20, 1250, 510);
+        graphics.beginFill(0xFFFFFF, 0.8);
+        graphics.drawRoundedRect(70, 20, app.screen.width - 300, 400, 15); // Smaller box dimensions
         graphics.endFill();
         app.stage.addChild(graphics);
     
-        let conversationText = new PIXI.Text(`Ciao Admin!,in questo livello vedrai le funzioni. 
-
-Una funzione è un blocco di codice che può essere chiamato o eseguito per svolgere una specifica operazione o compito.
-Le funzioni consentono di organizzare il codice in unità modulari e riutilizzabili, facilitando la scrittura, la comprensione e la manutenzione 
-del programma.
-Una funzione può essere definita con un nome univoco e può essere chiamata da altre parti del programma ogni volta che è necessario 
-eseguire il suo comportamento.
-
-Funzioni ricorsive: Una funzione ricorsiva è un modo di definire una funzione in cui la sua implementazione si basa sulla 
-sua stessa definizione, frammentando il problema principale in sottoproblemi più piccoli. 
-Questa definizione si articola in due parti cruciali: il caso base e il passo induttivo.
-Il caso base fornisce la condizione che determina quando la ricorsione deve terminare, indicando un risultato noto per input specifici.
-In assenza di questa condizione, la funzione continuerebbe a chiamare se stessa all'infinito.
-Il passo induttivo specifica come la funzione si richiama, generalmente con argomenti modificati o ridotti, 
-procedendo in direzione del caso base. Questa parte è essenziale poiché permette di risolvere il problema originale suddividendolo
-in sottoproblemi più gestibili, avvicinandosi così alla soluzione completa.
-
-Esercizio: 
-
-`, {
+        let conversationText = new PIXI.Text(`   Ciao, in questo livello vedrai le funzioni.
+    
+    Una funzione è un blocco di codice che può essere chiamato o eseguito per svolgere una specifica operazione o compito.
+    Le funzioni consentono di organizzare il codice in unità modulari e riutilizzabili, facilitando la scrittura, la comprensione 
+    e la manutenzione  del programma.
+    
+    Funzioni ricorsive: Una funzione ricorsiva è un modo di definire una funzione in cui la sua implementazione si basa sulla
+    sua stessa definizione, frammentando il problema principale in sottoproblemi più piccoli.
+    Questa definizione si articola in due parti cruciali: il caso base e il passo induttivo.`, {
           fontFamily: 'Arial',
-          fontSize: 19,
+          fontSize: 20, // Smaller font size
           fill: 0x000000,
+          wordWrap: true,
+          wordWrapWidth: app.screen.width - 80, // Adjusted for the smaller box
         });
-        conversationText.x = 710;
+        conversationText.x = 80;
         conversationText.y = 50;
         app.stage.addChild(conversationText);
     
-        graphics.interactive = true;
-        graphics.buttonMode = true;
-        graphics.on('pointerdown', () => {
-          
+        const button = new PIXI.Text('Vai all\'esercizio', {
+          fontFamily: 'Arial',
+          fontSize: 20, // Slightly smaller button text
+          fill: 0xFFFFFF,
+          fontWeight: 'bold'
+        });
+        const buttonBackground = new PIXI.Graphics();
+        buttonBackground.beginFill(0x0000FF);
+        buttonBackground.drawRoundedRect(0, 0, button.width + 20, button.height + 10, 10);
+        buttonBackground.endFill();
+        button.x = 10;
+        button.y = 5;
+        buttonBackground.x = app.screen.width / 2 - buttonBackground.width / 2;
+        buttonBackground.y = 360; // Adjusted position for the smaller box
+        buttonBackground.addChild(button);
+        buttonBackground.eventMode = 'static';
+        buttonBackground.cursor = 'pointer';
+        app.stage.addChild(buttonBackground);
+    
+        buttonBackground.on('pointerdown', () => {
           app.stage.removeChild(graphics);
           app.stage.removeChild(conversationText);
-          
-    
-          app.stage.addChild(graphics);
-          app.stage.addChild(conversationText);
-          
+          app.stage.removeChild(buttonBackground);
+          conversationActive = false;
+          navigate('/code-editor');
         });
-        
       }
-      
     };
     
-   
+
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('keyup', handleKeyUp);
 
-    app.ticker.add(() => {
-      updateCharacterPosition();
-    });
+    app.ticker.add(updateCharacterPosition);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp);
+      app.destroy(true, { children: true, texture: true, baseTexture: true });
     };
-  }, []);
- const handleHome=()=>{
-  let body = document.querySelector("body")
-  body.className="bg"
- }
+  }, [navigate]);
 
-  const handleShowSetting=()=>{
-    setShowSetting(prev=>!prev)
-    if(!showSetting){
-      let canva = document.querySelector("canvas")
-      canva.className="hide";
-      let body = document.querySelector("body")
-      body.className="nobg"
-    }else{
-      let canva = document.querySelector("canvas")
-      canva.className="vis";
-      let body = document.querySelector("body")
-      body.className="bg"
+  const handleHome = () => {
+    let body = document.querySelector("body");
+    body.className = "bg";
+  };
+
+  const handleShowSetting = () => {
+    setShowSetting(prev => !prev);
+    if (!showSetting) {
+      let canva = document.querySelector("canvas");
+      canva.className = "hide";
+      let body = document.querySelector("body");
+      body.className = "nobg";
+    } else {
+      let canva = document.querySelector("canvas");
+      canva.className = "vis";
+      let body = document.querySelector("body");
+      body.className = "bg";
     }
-  }
+  };
 
   return (
     <div className="relative">
       <div id="field-container" ref={fieldContainer} className="relative">
       </div>
-      <div className="absolute top-4 left-4">
-        <CodeEditor />
-      </div>
-      <button className='impostazioni' onClick={handleShowSetting}>{!showSetting ?  <img src="./src/assets/image/ingranaggio.gif"/> :<img src="./src/assets/image/x.png" alt="" />}</button>
-      {showSetting && <FrameSetting/>}
-      <Link onClick={handleHome} className='absolute impostazioni2' to="/"><img src="./src/assets/image/home.png" alt="" /></Link>
+      <button className='impostazioni' onClick={handleShowSetting}>
+        {!showSetting ? <img src="./src/assets/image/ingranaggio.gif" alt="settings" /> : <img src="./src/assets/image/x.png" alt="close" />}
+      </button>
+      {showSetting && <FrameSetting />}
+      <Link onClick={handleHome} className='absolute impostazioni2' to="/"><img src="./src/assets/image/home.png" alt="home" /></Link>
     </div>
   );
 }
