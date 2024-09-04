@@ -55,5 +55,4 @@ I giocatori dovranno assicurarsi che la loro implementazione della funzione `fat
 - [**Dina Timcu** ](https://github.com/dinasaura)
 - [**Ibrahima Tely Barry**](https://github.com/ibrabarry23)
 
-## Licenza
 
