@@ -30,7 +30,6 @@ I giocatori dovranno assicurarsi che la loro implementazione della funzione `fat
 * **Integrazione con JDoodle:** Utilizza l'API di JDoodle per compilare ed eseguire il codice degli utenti direttamente nel browser, fornendo un ambiente di sviluppo interattivo.
 
 
-
 ## Tecnologie utilizzate
 
 * **Frontend:** React (JSX), PixiJS
@@ -52,10 +51,9 @@ I giocatori dovranno assicurarsi che la loro implementazione della funzione `fat
 - [**Fabiola Ibrahimi**](https://github.com/FabiIb)
 - [ **Marco Ruberto**](https://github.com/rubertomarco48)
 -[**Mirka Medaglini** ](https://github.com/ibrabarry23/CodeVenture/tree/main)
-* **Luciano Rea** - [https://github.com/Camrotez](https://github.com/Camrotez)
-* **Dina Timcu** - [https://github.com/dinasaura](https://github.com/dinasaura)
-* **Ibrahima Tely Barry** - [https://github.com/ibrabarry23](https://github.com/ibrabarry23)
+- [**Luciano Rea**](https://github.com/Camrotez)
+- [**Dina Timcu** ](https://github.com/dinasaura)
+- [**Ibrahima Tely Barry**](https://github.com/ibrabarry23)
 
 ## Licenza
 
-Questo progetto è rilasciato sotto la licenza MIT. Vedi il file `LICENSE` per maggiori dettagli.
